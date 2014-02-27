@@ -1,0 +1,22 @@
+{
+    "name": "orukusaki/slackbundle",
+    "type": "symfony-bundle",
+    "keywords": ["slack", "api", "symfony2"],
+    "homepage": "http://github.com/orukusaki/slackbundle",
+    "authors": [
+        {
+            "name": "Peter Smith",
+            "email": "peter@orukusaki.co.uk"
+        }
+    ],
+    "license": "MIT",
+    "description": "Symfony2 Bundle for communicating with the Slack API",
+    "autoload": {
+        "psr-0": { "Orukusaki\\Bundle\\SlackBundle": "" }
+    },
+    "require": {
+        "php": ">=5.4",
+        "symfony/symfony": "~2.4",
+        "misd/guzzle-bundle": "1.1.*"
+    }
+}

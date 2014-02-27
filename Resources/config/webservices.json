@@ -1,0 +1,139 @@
+{
+    "name": "Slack",
+    "apiVersion": "v1",
+    "baseUrl": "https://slack.com/api/",
+    "description": "Slack Api",
+    "operations": {
+        "getUserList": {
+            "httpMethod": "GET",
+            "uri": "users.list",
+            "summary": "This method returns a list of all users in the team. This includes deleted/deactivated users."
+        },
+        "getChannelList": {
+            "httpMethod": "GET",
+            "uri": "channels.list",
+            "summary": "This method returns a list of all channels in the team"
+        },
+        "getChannelHistory": {
+            "httpMethod": "GET",
+            "uri": "channels.history",
+            "summary": "This method returns a portion of messages/events from the specified channel.",
+            "parameters": {
+                "channel": {
+                    "location": "query",
+                    "required": true
+                },
+                "latest": {
+                    "location": "query"
+                },
+                "oldest": {
+                    "location": "query"
+                },
+                "count": {
+                    "location": "query"
+                }
+            }
+        },
+        "markChannel": {
+            "httpMethod": "POST",
+            "uri": "channels.mark",
+            "summary": "This method moves the read cursor in a channel.",
+            "parameters": {
+                "channel": {
+                    "location": "postField",
+                    "required": true
+                },
+                "ts": {
+                    "location": "postField",
+                    "required": true
+                }
+            }
+        },
+        "getImList": {
+            "httpMethod": "GET",
+            "uri": "ims.list",
+            "summary": "This method returns a list of all im channels that the user has"
+        },
+        "getImHistory": {
+            "httpMethod": "GET",
+            "uri": "ims.history",
+            "summary": "This method returns a portion of messages/events from the specified direct message channel.",
+            "parameters": {
+                "channel": {
+                    "location": "query",
+                    "required": true
+                },
+                "latest": {
+                    "location": "query"
+                },
+                "oldest": {
+                    "location": "query"
+                },
+                "count": {
+                    "location": "query"
+                }
+            }
+        },
+        "getGroupList": {
+            "httpMethod": "GET",
+            "uri": "groups.list",
+            "summary": "This method returns a list of all groups in the team"
+        },
+        "getGroupHistory": {
+            "httpMethod": "GET",
+            "uri": "groups.history",
+            "summary": "This method returns a list of groups in the team that the caller is in.",
+            "parameters": {
+                "channel": {
+                    "location": "query",
+                    "required": true
+                },
+                "latest": {
+                    "location": "query"
+                },
+                "oldest": {
+                    "location": "query"
+                },
+                "count": {
+                    "location": "query"
+                }
+            }
+        },
+        "postMessage": {
+            "httpMethod": "POST",
+            "uri": "chat.postMessage",
+            "summary": "This method posts a message to a channel.",
+            "parameters": {
+                "channel": {
+                    "location": "postField",
+                    "required": true
+                },
+                "text": {
+                    "location": "postField",
+                    "required": true
+                },
+                "username": {
+                    "location": "postField"
+                },
+                "parse": {
+                    "location": "postField"
+                },
+                "link_names": {
+                    "location": "postField"
+                },
+                "attachments": {
+                    "location": "postField"
+                },
+                "unfurl_links": {
+                    "location": "postField"
+                },
+                "icon_url": {
+                    "location": "postField"
+                },
+                "icon_emoji": {
+                    "location": "postField"
+                }
+            }
+        }
+    }
+}

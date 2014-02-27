@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="slack.client" class="%guzzle.client.class%">
+            <call method="setDescription">
+                <argument type="service" id="slack.service_description"/>
+            </call>
+            <tag name="guzzle.client"/>
+         </service>
+
+        <service id="slack.service_description"
+                 class="%guzzle.service_description.class%"
+                 factory-class="%guzzle.service_description.class%"
+                 factory-method="factory">
+            <argument>%slack.client.description%</argument>
+        </service>
+
+        <service id="slack.run_command" class="Orukusaki\Bundle\SlackBundle\Command\RunCommand">
+            <argument type="service" id="slack.client" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="console.command" />
+        </service>
+
+        <service id="slack.identity" class="Orukusaki\Bundle\SlackBundle\Identity" />
+
+        <service id="slack.service.user" class="Orukusaki\Bundle\SlackBundle\Service\UserService">
+            <argument type="service" id="slack.client" />
+        </service>
+
+        <service id="slack.listener.output" class="Orukusaki\Bundle\SlackBundle\Listener\OutputMessageListener">
+            <argument type="service" id="slack.service.user" />
+            <tag name="kernel.event_listener" event="message.recieved" method="handleMessageEvent" />
+        </service>
+
+<!--         <service id="slack.listener.sayhi" class="Orukusaki\Bundle\SlackBundle\Listener\SayHiListener">
+            <argument type="service" id="slack.client" />
+            <argument type="service" id="slack.identity" />
+            <tag name="kernel.event_listener" event="message.recieved" method="handleMessageEvent" />
+        </service> -->
+    </services>
+</container>
