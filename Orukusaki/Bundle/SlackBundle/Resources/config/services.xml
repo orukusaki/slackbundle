@@ -19,6 +19,10 @@
             <argument>%slack.client.description%</argument>
         </service>
 
+        <service id="slack.slash.command.controller" class="Orukusaki\Bundle\SlackBundle\Controller\SlashCommandController">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
         <service id="slack.run_command" class="Orukusaki\Bundle\SlackBundle\Command\RunCommand">
             <argument type="service" id="slack.client" />
             <argument type="service" id="event_dispatcher" />
