@@ -42,7 +42,7 @@ In the Slack Integrations page, create a slash command pointing to <domain>/slac
 
 Running as a Bot
 =======
-  app/console slack:run <group-name>
+  app/console slack:run < group name >
 
 Adding your own commands
 =======
