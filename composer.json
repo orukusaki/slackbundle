@@ -18,5 +18,12 @@
         "php": ">=5.4",
         "symfony/symfony": "~2.4",
         "misd/guzzle-bundle": "1.1.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec" : "2.0.0-RC3@dev",
+        "bossa/phpspec2-expect" : "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }
