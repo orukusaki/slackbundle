@@ -5,7 +5,7 @@ use Symfony\Component\EventDispatcher\Event;
 
 class MessageRecievedEvent extends Event
 {
-    const KEY = 'message.recieved';
+    const KEY = 'slack.message.recieved';
 
     protected $message;
     protected $channel;
