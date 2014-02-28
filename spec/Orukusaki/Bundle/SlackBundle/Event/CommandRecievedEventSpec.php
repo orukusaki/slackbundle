@@ -37,7 +37,6 @@ class CommandRecievedEventSpec extends ObjectBehavior
 
    public function it_exposes_a_command()
     {
-        // var_dump($this->getCommand());
         $this->getCommand()->shouldReturn(
             [
                 'token'        => '12345678',

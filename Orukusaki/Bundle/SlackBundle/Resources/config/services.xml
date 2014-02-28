@@ -23,6 +23,10 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
+        <service id="slack.webhook.controller" class="Orukusaki\Bundle\SlackBundle\Controller\WebhookController">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
         <service id="slack.run_command" class="Orukusaki\Bundle\SlackBundle\Command\RunCommand">
             <argument type="service" id="slack.client" />
             <argument type="service" id="event_dispatcher" />
@@ -37,6 +41,7 @@
 
         <service id="slack.listener.output" class="Orukusaki\Bundle\SlackBundle\Listener\OutputMessageListener">
             <argument type="service" id="slack.service.user" />
+            <argument type="service" id="logger" />
             <tag name="kernel.event_listener" event="slack.message.recieved" method="handleMessageEvent" />
         </service>
 

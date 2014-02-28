@@ -7,20 +7,27 @@ class OutputMessageListener
 {
     protected $userService;
 
-    public function __construct($userService)
+    public function __construct($userService, $logger)
     {
         $this->userService = $userService;
+        $this->logger = $logger;
     }
 
     public function handleMessageEvent($event)
     {
         $message = $event->getMessage();
         $date = new DateTime;
-        $date->setTimeStamp($message['ts']);
+
+        if (isset($message['ts'])) {
+            $date->setTimeStamp($message['ts']);
+        }
+
         $username = isset($message['user']) ? $this->userService->getUserName($message['user']) : '*** me ***';
 
-        echo '[' . $date->format('Y-m-d H:i:s') . '] ';
-        echo '[' . $username . '] ';
-        echo $message['text'] . PHP_EOL;
+        $text = '[' . $date->format('Y-m-d H:i:s') . '] '
+              . '[' . $username . '] '
+              . $message['text'] . PHP_EOL;
+
+        $this->logger->info($text);
     }
 }

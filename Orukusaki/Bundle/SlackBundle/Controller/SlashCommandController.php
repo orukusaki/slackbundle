@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/", service="slack.slash.command.controller")
+ * @Route("/slashcommand", service="slack.slash.command.controller")
  */
 class SlashCommandController extends Controller
 {
@@ -22,7 +22,7 @@ class SlashCommandController extends Controller
     }
 
     /**
-     * @Route("/slashcommand")
+     * @Route()
      * @Method("POST")
      */
     public function commandAction(Request $request)
