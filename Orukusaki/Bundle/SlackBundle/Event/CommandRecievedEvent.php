@@ -7,30 +7,21 @@ class CommandRecievedEvent extends Event
 {
     const KEY = 'slack.command.recieved';
 
-    public $token;
-    public $team_id;
-    public $channel_id;
-    public $channel_name;
-    public $user_id;
-    public $user_name;
-    public $command;
-    public $text;
-
+    protected $command = [];
     protected $response = '';
 
-    public static function fromRequest($request)
+    public function __construct($request)
     {
-        $e = new self;
-        $e->token        = $request->get('token');
-        $e->team_id      = $request->get('team_id');
-        $e->channel_id   = $request->get('channel_id');
-        $e->channel_name = $request->get('channel_name');
-        $e->user_id      = $request->get('user_id');
-        $e->user_name    = $request->get('user_name');
-        $e->command      = $request->get('command');
-        $e->text         = $request->get('text');
-
-        return $e;
+        $this->command = [
+            'token'        => $request->get('token'),
+            'team_id'      => $request->get('team_id'),
+            'channel_id'   => $request->get('channel_id'),
+            'channel_name' => $request->get('channel_name'),
+            'user_id'      => $request->get('user_id'),
+            'user_name'    => $request->get('user_name'),
+            'command'      => $request->get('command'),
+            'text'         => $request->get('text'),
+        ];
     }
 
     public function getResponse()
@@ -44,5 +35,10 @@ class CommandRecievedEvent extends Event
             $this->stopPropagation();
         }
         $this->response = $response;
+    }
+
+    public function getCommand()
+    {
+        return $this->command;
     }
 }
