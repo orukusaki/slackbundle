@@ -7,6 +7,7 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use Guzzle\Plugin\Mock\MockPlugin;
 use Symfony\Component\HttpFoundation\Request;
+use Guzzle\Http\Message\Response as GuzzleResponse;
 
 /**
  * Slack context.
@@ -15,15 +16,28 @@ class SlackContext extends BehatContext
 {
     use KernelDictionary;
 
+    protected $plugin;
+    protected $identity;
+    protected $slashUrl;
+    protected $webhookUrl;
+    protected $channel;
+    protected $response;
+
     /**
      * @BeforeScenario
      */
     public function prepare()
     {
-        $slack = $this->getContainer()->get('slack.client');
+        $container = $this->getContainer();
+        $slack = $container->get('slack.client');
         $this->plugin = new MockPlugin();
         $slack->addSubscriber($this->plugin);
-        $this->identity = $this->getContainer()->get('slack.identity');
+
+        $router = $container->get('router');
+
+        $this->identity = $container->get('slack.identity');
+        $this->slashUrl = $router->generate('orukusaki_slack_slashcommand_command');
+        $this->webhookUrl = $router->generate('orukusaki_slack_webhook_command');
     }
 
     /**
@@ -43,10 +57,10 @@ class SlackContext extends BehatContext
         $cmd = array_shift($parts);
         $text = implode(' ', $parts);
 
-        $this->plugin->addResponse(new \Guzzle\Http\Message\Response(200));
+        $this->plugin->addResponse(new GuzzleResponse(200));
 
         $request = Request::create(
-            '/slack/slashcommand',
+            $this->slashUrl,
             'POST',
             array(
                 'channel_id' => $this->channel,
@@ -62,10 +76,10 @@ class SlackContext extends BehatContext
      */
     public function iSay($text)
     {
-        $this->plugin->addResponse(new \Guzzle\Http\Message\Response(200));
+        $this->plugin->addResponse(new GuzzleResponse(200));
 
         $request = Request::create(
-            '/slack/webhook',
+            $this->webhookUrl,
             'POST',
             array(
                 'channel_id' => $this->channel,
