@@ -2,6 +2,7 @@
 namespace Orukusaki\Bundle\SlackBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 class CommandRecievedEvent extends Event
 {
@@ -10,7 +11,7 @@ class CommandRecievedEvent extends Event
     protected $command = [];
     protected $response = '';
 
-    public function __construct($request)
+    public function __construct(ParameterBag $request)
     {
         $this->command = [
             'token'        => $request->get('token'),
