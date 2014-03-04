@@ -134,6 +134,25 @@
                     "location": "postField"
                 }
             }
+        },
+        "updateMessage": {
+            "httpMethod": "POST",
+            "uri": "chat.update",
+            "summary": "This method updates a message in a channel.",
+            "parameters": {
+                "channel": {
+                    "location": "postField",
+                    "required": true
+                },
+                "text": {
+                    "location": "postField",
+                    "required": true
+                },
+                "ts": {
+                    "location": "postField",
+                    "required": true
+                }
+            }
         }
     }
 }
