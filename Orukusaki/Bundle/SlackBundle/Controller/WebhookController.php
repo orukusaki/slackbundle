@@ -34,6 +34,7 @@ class WebhookController extends Controller
                 'channel_name' => $request->get('channel_name'),
                 'user_id'      => $request->get('user_id'),
                 'user_name'    => $request->get('user_name'),
+                'timestamp'    => $request->get('timestamp'),
                 'text'         => $request->get('text'),
             ],
             $request->get('channel_id')
