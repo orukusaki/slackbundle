@@ -27,7 +27,7 @@ class SlashCommandController extends Controller
      */
     public function commandAction(Request $request)
     {
-        $commandEvent = new CommandRecievedEvent($request);
+        $commandEvent = new CommandRecievedEvent($request->request);
         $this->dispatcher->dispatch(CommandRecievedEvent::KEY, $commandEvent);
         $response = new Response($commandEvent->getResponse());
 
