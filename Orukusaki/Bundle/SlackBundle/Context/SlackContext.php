@@ -5,9 +5,9 @@ namespace Orukusaki\Bundle\SlackBundle\Context;
 use Behat\Behat\Context\BehatContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Symfony2Extension\Context\KernelDictionary;
+use Guzzle\Http\Message\Response as GuzzleResponse;
 use Guzzle\Plugin\Mock\MockPlugin;
 use Symfony\Component\HttpFoundation\Request;
-use Guzzle\Http\Message\Response as GuzzleResponse;
 
 /**
  * Slack context.
@@ -124,14 +124,6 @@ class SlackContext extends BehatContext
 
         if ($requests[0]->getPostField('text') != (string) $string) {
             throw new \Exception(sprintf('Unexpected text sent: %s', $requests[0]->getPostField('text')));
-        }
-
-        if ($requests[0]->getPostField('username') != $this->identity->username) {
-            throw new \Exception(sprintf('Unexpected username: %s', $requests[0]->getPostField('username')));
-        }
-
-        if ($requests[0]->getPostField('icon_emoji') != $this->identity->emoji) {
-            throw new \Exception(sprintf('Unexpected emoji: %s', $requests[0]->getPostField('icon_emoji')));
         }
     }
 
