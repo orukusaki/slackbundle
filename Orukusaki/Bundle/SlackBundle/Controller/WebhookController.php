@@ -42,6 +42,6 @@ class WebhookController extends Controller
 
         $this->dispatcher->dispatch(MessageRecievedEvent::KEY, $event);
 
-        return  new Response();
+        return new Response();
     }
 }
