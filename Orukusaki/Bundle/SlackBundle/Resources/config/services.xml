@@ -9,6 +9,9 @@
             <call method="setDescription">
                 <argument type="service" id="slack.service_description"/>
             </call>
+            <call method="addSubscriber">
+                <argument type="service" id="slack.error_subscriber"/>
+            </call>
             <tag name="guzzle.client"/>
          </service>
 
@@ -34,6 +37,8 @@
         </service>
 
         <service id="slack.identity" class="Orukusaki\Bundle\SlackBundle\Identity" />
+
+        <service id="slack.error_subscriber" class="Orukusaki\Bundle\SlackBundle\Subscriber\ApiErrorSubscriber" />
 
         <service id="slack.service.user" class="Orukusaki\Bundle\SlackBundle\Service\UserService">
             <argument type="service" id="slack.client" />

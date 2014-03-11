@@ -57,7 +57,7 @@ class SlackContext extends BehatContext
         $cmd = array_shift($parts);
         $text = implode(' ', $parts);
 
-        $this->plugin->addResponse(new GuzzleResponse(200));
+        $this->plugin->addResponse($this->getSuccessResponse());
 
         $request = Request::create(
             $this->slashUrl,
@@ -76,7 +76,7 @@ class SlackContext extends BehatContext
      */
     public function iSay($text)
     {
-        $this->plugin->addResponse(new GuzzleResponse(200));
+        $this->plugin->addResponse($this->getSuccessResponse());
 
         $request = Request::create(
             $this->webhookUrl,
@@ -153,5 +153,10 @@ class SlackContext extends BehatContext
         if (count($requests)) {
             throw new \Exception('Did not expect to see any API calls made.');
         }
+    }
+
+    private function getSuccessResponse()
+    {
+        return new GuzzleResponse(200, null, '{"ok":true}');
     }
 }
