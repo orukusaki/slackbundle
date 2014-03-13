@@ -3,7 +3,7 @@ namespace Orukusaki\Bundle\SlackBundle\Listener;
 
 use DateTime;
 
-class OutputMessageListener
+class LogListener
 {
     protected $userService;
 
@@ -29,5 +29,12 @@ class OutputMessageListener
               . $message['text'] . PHP_EOL;
 
         $this->logger->info($text);
+    }
+
+    public function handleCommandEvent($event)
+    {
+        $command = $event->getCommand();
+        $username = isset($command['user_id']) ? $this->userService->getUserName($command['user_id']) : '';
+
     }
 }
