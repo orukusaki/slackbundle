@@ -4,7 +4,7 @@ namespace spec\Orukusaki\Bundle\SlackBundle\Event;
 
 use PhpSpec\ObjectBehavior;
 
-class MessageRecievedEventSpec extends ObjectBehavior
+class MessageReceivedEventSpec extends ObjectBehavior
 {
     public function it_is_an_event()
     {

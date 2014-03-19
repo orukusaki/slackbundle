@@ -4,9 +4,9 @@ namespace Orukusaki\Bundle\SlackBundle\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-class CommandRecievedEvent extends Event
+class CommandReceivedEvent extends Event
 {
-    const KEY = 'slack.command.recieved';
+    const KEY = 'slack.command.received';
 
     protected $command = [];
     protected $response = '';

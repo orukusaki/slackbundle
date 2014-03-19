@@ -5,7 +5,7 @@ namespace spec\Orukusaki\Bundle\SlackBundle\Event;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-class CommandRecievedEventSpec extends ObjectBehavior
+class CommandReceivedEventSpec extends ObjectBehavior
 {
     public function let()
     {

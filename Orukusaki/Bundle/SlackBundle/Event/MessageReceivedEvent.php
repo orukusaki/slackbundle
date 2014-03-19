@@ -3,9 +3,9 @@ namespace Orukusaki\Bundle\SlackBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
-class MessageRecievedEvent extends Event
+class MessageReceivedEvent extends Event
 {
-    const KEY = 'slack.message.recieved';
+    const KEY = 'slack.message.received';
 
     protected $message;
     protected $channel;

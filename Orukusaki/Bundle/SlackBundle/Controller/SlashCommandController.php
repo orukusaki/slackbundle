@@ -2,7 +2,7 @@
 
 namespace Orukusaki\Bundle\SlackBundle\Controller;
 
-use Orukusaki\Bundle\SlackBundle\Event\CommandRecievedEvent;
+use Orukusaki\Bundle\SlackBundle\Event\CommandreceivedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,8 +27,8 @@ class SlashCommandController extends Controller
      */
     public function commandAction(Request $request)
     {
-        $commandEvent = new CommandRecievedEvent($request->request);
-        $this->dispatcher->dispatch(CommandRecievedEvent::KEY, $commandEvent);
+        $commandEvent = new CommandreceivedEvent($request->request);
+        $this->dispatcher->dispatch(CommandreceivedEvent::KEY, $commandEvent);
         $response = new Response($commandEvent->getResponse());
 
         return $response;

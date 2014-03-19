@@ -2,7 +2,7 @@
 
 namespace Orukusaki\Bundle\SlackBundle\Controller;
 
-use Orukusaki\Bundle\SlackBundle\Event\MessageRecievedEvent;
+use Orukusaki\Bundle\SlackBundle\Event\MessageReceivedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,7 +27,7 @@ class WebhookController extends Controller
      */
     public function commandAction(Request $request)
     {
-        $event = new MessageRecievedEvent(
+        $event = new MessageReceivedEvent(
             [
                 'token'        => $request->get('token'),
                 'team_id'      => $request->get('team_id'),
@@ -40,7 +40,7 @@ class WebhookController extends Controller
             $request->get('channel_id')
         );
 
-        $this->dispatcher->dispatch(MessageRecievedEvent::KEY, $event);
+        $this->dispatcher->dispatch(MessageReceivedEvent::KEY, $event);
 
         return new Response();
     }

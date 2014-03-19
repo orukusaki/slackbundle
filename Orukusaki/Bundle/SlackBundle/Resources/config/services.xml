@@ -46,13 +46,13 @@
         <service id="slack.listener.log" class="Orukusaki\Bundle\SlackBundle\Listener\LogListener">
             <argument type="service" id="slack.service.user" />
             <argument type="service" id="logger" />
-            <tag name="kernel.event_listener" event="slack.message.recieved" method="handleMessageEvent" />
-            <tag name="kernel.event_listener" event="slack.command.recieved" method="handleCommandEvent" />
+            <tag name="kernel.event_listener" event="slack.message.received" method="handleMessageEvent" />
+            <tag name="kernel.event_listener" event="slack.command.received" method="handleCommandEvent" />
         </service>
 
 <!--         <service id="slack.listener.sayhi" class="Orukusaki\Bundle\SlackBundle\Listener\SayHiListener">
             <argument type="service" id="slack.client" />
-            <tag name="kernel.event_listener" event="message.recieved" method="handleMessageEvent" />
+            <tag name="kernel.event_listener" event="message.received" method="handleMessageEvent" />
         </service> -->
     </services>
 </container>

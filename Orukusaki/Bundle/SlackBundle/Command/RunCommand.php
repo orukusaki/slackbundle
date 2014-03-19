@@ -2,7 +2,7 @@
 
 namespace Orukusaki\Bundle\SlackBundle\Command;
 
-use Orukusaki\Bundle\SlackBundle\Event\MessageRecievedEvent;
+use Orukusaki\Bundle\SlackBundle\Event\MessageReceivedEvent;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -57,8 +57,8 @@ class RunCommand extends Command
 
             foreach ($messages as $message) {
                 if ($message['type'] == 'message' && isset($message['text'])) {
-                    $event = new MessageRecievedEvent($message, $groupId);
-                    $this->dispatcher->dispatch(MessageRecievedEvent::KEY, $event);
+                    $event = new MessageReceivedEvent($message, $groupId);
+                    $this->dispatcher->dispatch(MessageReceivedEvent::KEY, $event);
                 }
             }
 

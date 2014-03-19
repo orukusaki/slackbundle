@@ -54,7 +54,7 @@ Add an Event Listener which will be triggered every time a message is received. 
 
     <service id="slack.listener.sayhi" class="Orukusaki\Bundle\SlackBundle\Listener\SayHiListener">
         <argument type="service" id="slack.client" />
-        <tag name="kernel.event_listener" event="slack.message.recieved" method="handleMessageEvent" />
+        <tag name="kernel.event_listener" event="slack.message.received" method="handleMessageEvent" />
     </service>
 
 To see what commands you can run against the API, have a look at Resources/config/webservices.xml
