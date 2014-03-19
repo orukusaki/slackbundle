@@ -6,6 +6,7 @@
 
     <services>
         <service id="slack.client" class="%guzzle.client.class%">
+            <argument>%slack.identity%</argument>
             <call method="setDescription">
                 <argument type="service" id="slack.service_description"/>
             </call>
@@ -36,8 +37,6 @@
             <tag name="console.command" />
         </service>
 
-        <service id="slack.identity" class="Orukusaki\Bundle\SlackBundle\Identity" />
-
         <service id="slack.error_subscriber" class="Orukusaki\Bundle\SlackBundle\Subscriber\ApiErrorSubscriber" />
 
         <service id="slack.service.user" class="Orukusaki\Bundle\SlackBundle\Service\UserService">
@@ -53,7 +52,6 @@
 
 <!--         <service id="slack.listener.sayhi" class="Orukusaki\Bundle\SlackBundle\Listener\SayHiListener">
             <argument type="service" id="slack.client" />
-            <argument type="service" id="slack.identity" />
             <tag name="kernel.event_listener" event="message.recieved" method="handleMessageEvent" />
         </service> -->
     </services>

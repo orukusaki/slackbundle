@@ -17,11 +17,12 @@ class SlackContext extends BehatContext
     use KernelDictionary;
 
     protected $plugin;
-    protected $identity;
     protected $slashUrl;
     protected $webhookUrl;
     protected $channel;
     protected $response;
+    protected $username;
+    protected $emoji;
 
     /**
      * @BeforeScenario
@@ -33,9 +34,13 @@ class SlackContext extends BehatContext
         $this->plugin = new MockPlugin();
         $slack->addSubscriber($this->plugin);
 
+        $description = $container->get('slack.service_description');
+
+        $this->username = $description->getOperation('postMessage')->getParam('username')->getDefault();
+        $this->emoji = $description->getOperation('postMessage')->getParam('icon_emoji')->getDefault();
+
         $router = $container->get('router');
 
-        $this->identity = $container->get('slack.identity');
         $this->slashUrl = $router->generate('orukusaki_slack_slashcommand_command');
         $this->webhookUrl = $router->generate('orukusaki_slack_webhook_command');
     }
@@ -128,17 +133,17 @@ class SlackContext extends BehatContext
     }
 
     /**
-     * @Given /^the message identity should be correct$/
+     * @Given /^the message identity should match the defaults$/
      */
-    public function theMessageIdentityShouldBeCorrect()
+    public function theMessageIdentityShouldMatchTheDefaults()
     {
         $requests = $this->plugin->getReceivedRequests();
 
-        if ($requests[0]->getPostField('username') != $this->identity->username) {
+        if ($requests[0]->getPostField('username') != $this->username) {
             throw new \Exception(sprintf('Unexpected username: %s', $requests[0]->getPostField('username')));
         }
 
-        if ($requests[0]->getPostField('icon_emoji') != $this->identity->emoji) {
+        if ($requests[0]->getPostField('icon_emoji') != $this->emoji) {
             throw new \Exception(sprintf('Unexpected emoji: %s', $requests[0]->getPostField('icon_emoji')));
         }
     }

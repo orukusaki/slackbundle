@@ -28,7 +28,7 @@ Add config to config.yml:
         api_key: <Your API Key>
         identity:
             username: My Api Bot
-            emoji: ":space_indvader:"
+            emoji: ":space_invader:"
 
 Recieving Slash commands and webhooks
 -------------------------------------
@@ -54,7 +54,6 @@ Add an Event Listener which will be triggered every time a message is received. 
 
     <service id="slack.listener.sayhi" class="Orukusaki\Bundle\SlackBundle\Listener\SayHiListener">
         <argument type="service" id="slack.client" />
-        <argument type="service" id="slack.identity" />
         <tag name="kernel.event_listener" event="slack.message.recieved" method="handleMessageEvent" />
     </service>
 
@@ -76,10 +75,10 @@ Then in the constructor of your FeatureContext, import the SlackContext:
 
     $this->useContext('slack', new \Orukusaki\Bundle\SlackBundle\Context\SlackContext());
 
-Use 
+Use
 
     bin/behat -dl
-    
+
 To see the steps now available to you.
 
 Contributing

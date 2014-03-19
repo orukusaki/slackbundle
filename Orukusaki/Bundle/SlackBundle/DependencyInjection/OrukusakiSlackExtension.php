@@ -30,11 +30,13 @@ class OrukusakiSlackExtension extends Extension
             __DIR__ . '/../Resources/config/webservices.json'
         );
 
-        $container->getDefinition('slack.identity')
-            ->addArgument($config['identity']['username'])
-            ->addArgument($config['identity']['emoji']);
-
-        $container->getDefinition('slack.client')
+        $container
+            ->getDefinition('slack.client')
             ->addMethodCall('setDefaultOption', ['query/token', $config['api_key']]);
+
+        $container->setParameter(
+            'slack.identity',
+            ['username' => $config['identity']['username'], 'icon_emoji' => $config['identity']['emoji']]
+        );
     }
 }
