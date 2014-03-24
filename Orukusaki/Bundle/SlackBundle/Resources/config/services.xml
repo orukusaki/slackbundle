@@ -6,7 +6,9 @@
 
     <services>
         <service id="slack.client" class="Orukusaki\Bundle\SlackBundle\Client">
-            <argument>%slack.identity%</argument>
+            <argument type="collection">
+                <argument key="identity">%slack.identity%</argument>
+            </argument>
             <call method="setDescription">
                 <argument type="service" id="slack.service_description"/>
             </call>
