@@ -5,7 +5,10 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="slack.client" class="Orukusaki\Bundle\SlackBundle\Client">
+        <service id="slack.client"
+                 class="Orukusaki\Bundle\SlackBundle\Client"
+                 factory-class="Orukusaki\Bundle\SlackBundle\Client"
+                 factory-method="factory">
             <argument type="collection">
                 <argument key="identity">%slack.identity%</argument>
             </argument>

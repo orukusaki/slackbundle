@@ -12,6 +12,8 @@ class Client extends BaseClient
     {
         $client = parent::factory($config);
         $client->identity = $config['identity'];
+
+        return $client;
     }
 
     public function postMessage($args)
