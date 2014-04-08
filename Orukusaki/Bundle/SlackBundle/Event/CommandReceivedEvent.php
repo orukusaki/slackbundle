@@ -8,12 +8,12 @@ class CommandReceivedEvent extends Event
 {
     const KEY = 'slack.command.received';
 
-    protected $command = [];
+    protected $command = array();
     protected $response = '';
 
     public function __construct(ParameterBag $request)
     {
-        $this->command = [
+        $this->command = array(
             'token'        => $request->get('token'),
             'team_id'      => $request->get('team_id'),
             'channel_id'   => $request->get('channel_id'),
@@ -22,7 +22,7 @@ class CommandReceivedEvent extends Event
             'user_name'    => $request->get('user_name'),
             'command'      => $request->get('command'),
             'text'         => $request->get('text'),
-        ];
+        );
     }
 
     public function getResponse()

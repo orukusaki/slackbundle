@@ -69,7 +69,7 @@ class RunCommand extends Command
     {
         $response = $this
             ->client
-            ->getGroupHistory(['channel' => $groupId, 'oldest' => $this->latest]);
+            ->getGroupHistory(array('channel' => $groupId, 'oldest' => $this->latest));
 
         if (!empty($response['messages'])) {
 
@@ -78,7 +78,7 @@ class RunCommand extends Command
             return $response['messages'];
         }
 
-        return [];
+        return array();
 
     }
 }

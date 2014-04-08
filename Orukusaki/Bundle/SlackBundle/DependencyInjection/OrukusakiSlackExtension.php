@@ -32,11 +32,11 @@ class OrukusakiSlackExtension extends Extension
 
         $container
             ->getDefinition('slack.client')
-            ->addMethodCall('setDefaultOption', ['query/token', $config['api_key']]);
+            ->addMethodCall('setDefaultOption', array('query/token', $config['api_key']));
 
         $container->setParameter(
             'slack.identity',
-            ['username' => $config['identity']['username'], 'icon_emoji' => $config['identity']['emoji']]
+            array('username' => $config['identity']['username'], 'icon_emoji' => $config['identity']['emoji'])
         );
     }
 }
