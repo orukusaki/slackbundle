@@ -2,7 +2,7 @@
 
 namespace Orukusaki\Bundle\SlackBundle\Context;
 
-use Behat\Behat\Context\BehatContext;
+use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use Guzzle\Http\Message\Response as GuzzleResponse;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Slack context.
  */
-class SlackContext extends BehatContext
+class SlackContext implements Context
 {
     use KernelDictionary;
 
@@ -34,7 +34,6 @@ class SlackContext extends BehatContext
         $this->plugin = new MockPlugin();
         $slack->addSubscriber($this->plugin);
 
-        $description = $container->get('slack.service_description');
         $this->identity = $container->getParameter('slack.identity');
 
         $router = $container->get('router');
@@ -49,6 +48,7 @@ class SlackContext extends BehatContext
     public function iAmInChannel($channel)
     {
         $this->channel = $channel;
+        $this->plugin->addResponse($this->getSuccessResponse());
     }
 
     /**
@@ -60,7 +60,6 @@ class SlackContext extends BehatContext
         $cmd = array_shift($parts);
         $text = implode(' ', $parts);
 
-        $this->plugin->addResponse($this->getSuccessResponse());
 
         $request = Request::create(
             $this->slashUrl,
@@ -79,8 +78,6 @@ class SlackContext extends BehatContext
      */
     public function iSay($text)
     {
-        $this->plugin->addResponse($this->getSuccessResponse());
-
         $request = Request::create(
             $this->webhookUrl,
             'POST',
@@ -107,7 +104,7 @@ class SlackContext extends BehatContext
      */
     public function iShouldNotSeeADirectResponse()
     {
-        $this->iShouldSeeTheResponse(new PyStringNode(''));
+        $this->iShouldSeeTheResponse(new PyStringNode([], 0));
     }
 
     /**
@@ -120,7 +117,6 @@ class SlackContext extends BehatContext
         if (!count($requests)) {
             throw new \Exception('No Requests were sent');
         }
-
         if ($requests[0]->getPostField('channel') != $this->channel) {
             throw new \Exception(sprintf('Wrong or missing channel: %s', $requests[0]->getPostField('channel')));
         }

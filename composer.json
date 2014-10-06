@@ -21,10 +21,9 @@
     },
     "require-dev": {
         "phpspec/phpspec" : "2.0.0-RC3@dev",
-        "bossa/phpspec2-expect" : "dev-master"
-    },
-    "suggest": {
-        "behat/symfony2-extension": "To use the Slack Behat Context for functional testing"
+        "bossa/phpspec2-expect" : "dev-master",
+        "behat/symfony2-extension": "~2.0",
+        "behat/behat": "~3.0,>=3.0.4"
     },
     "config": {
         "bin-dir": "bin"

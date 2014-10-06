@@ -19,7 +19,12 @@ class Client extends BaseClient
     public function postMessage($args)
     {
         $args = array_merge($this->identity, $args);
-
         return $this->getCommand('postMessage', $args)->execute();
     }
+
+    public function setDefaultOption($keyOrPath, $value)
+    {
+        return parent::setDefaultOption($keyOrPath, $value);
+    }
+
 }
