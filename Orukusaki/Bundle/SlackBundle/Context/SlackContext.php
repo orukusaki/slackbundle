@@ -16,6 +16,9 @@ class SlackContext implements Context
 {
     use KernelDictionary;
 
+    /**
+     * @var MockPlugin
+     */
     protected $plugin;
     protected $slashUrl;
     protected $webhookUrl;
@@ -43,12 +46,25 @@ class SlackContext implements Context
     }
 
     /**
+     * @Given /^Slack will respond ok to all requests$/
+     */
+    public function slackRespondsOk()
+    {
+        $this->plugin->addResponse($this->getSuccessResponse());
+        $this->plugin->getEventDispatcher()->addListener(
+            'mock.request',
+            function () {
+                $this->plugin->addResponse($this->getSuccessResponse());
+            }
+        );
+    }
+
+    /**
      * @Given /^I am in channel "([^"]*)"$/
      */
     public function iAmInChannel($channel)
     {
         $this->channel = $channel;
-        $this->plugin->addResponse($this->getSuccessResponse());
     }
 
     /**
@@ -64,11 +80,11 @@ class SlackContext implements Context
         $request = Request::create(
             $this->slashUrl,
             'POST',
-            array(
+            [
                 'channel_id' => $this->channel,
                 'command'    => $cmd,
                 'text'       => $text,
-            )
+            ]
         );
         $this->response = $this->getKernel()->handle($request);
     }
@@ -81,10 +97,10 @@ class SlackContext implements Context
         $request = Request::create(
             $this->webhookUrl,
             'POST',
-            array(
+            [
                 'channel_id' => $this->channel,
                 'text'       => $text,
-            )
+            ]
         );
         $this->response = $this->getKernel()->handle($request);
     }
