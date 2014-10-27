@@ -6,7 +6,7 @@ use Guzzle\Service\Client as BaseClient;
 
 class Client extends BaseClient
 {
-    protected $identity = [];
+    protected $identity = array();
 
     public static function factory($config = array())
     {

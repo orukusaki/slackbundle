@@ -4,7 +4,7 @@ namespace Orukusaki\Bundle\SlackBundle\Service;
 class UserService
 {
     protected $client;
-    protected $users = [];
+    protected $users = array();
 
     public function __construct($client)
     {

@@ -28,7 +28,7 @@ class WebhookController extends Controller
     public function commandAction(Request $request)
     {
         $event = new MessageReceivedEvent(
-            [
+            array(
                 'token'        => $request->get('token'),
                 'team_id'      => $request->get('team_id'),
                 'channel_name' => $request->get('channel_name'),
@@ -36,7 +36,7 @@ class WebhookController extends Controller
                 'user_name'    => $request->get('user_name'),
                 'timestamp'    => $request->get('timestamp'),
                 'text'         => $request->get('text'),
-            ],
+            ),
             $request->get('channel_id')
         );
 

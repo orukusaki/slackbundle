@@ -16,10 +16,10 @@ class SayHiListener
 
         if (strpos($message['text'], 'bot: hi') === 0) {
             $this->client->postMessage(
-                [
+                array(
                     'channel' => $event->getChannel(),
                     'text'    => 'Hi <@' . $message['user'] . '>',
-                ]
+                )
             );
         }
     }
