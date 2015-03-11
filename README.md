@@ -1,6 +1,8 @@
 Slack Bundle
 =================
 
+[![Build Status](https://travis-ci.org/orukusaki/slackbundle.svg)](https://travis-ci.org/orukusaki/slackbundle)
+
 This bundle provides
 
  - A Guzzle client to access the Slack API
