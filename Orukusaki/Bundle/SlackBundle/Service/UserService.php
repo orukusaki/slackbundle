@@ -15,7 +15,7 @@ class UserService
     /**
      * @var array
      */
-    protected $users = [];
+    protected $users = array();
 
     /**
      * @param $client

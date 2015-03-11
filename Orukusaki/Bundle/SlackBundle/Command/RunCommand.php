@@ -79,6 +79,5 @@ class RunCommand extends Command
         }
 
         return array();
-
     }
 }

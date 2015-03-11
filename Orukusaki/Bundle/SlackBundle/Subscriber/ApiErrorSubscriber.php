@@ -17,7 +17,7 @@ class ApiErrorSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return ['request.sent' => ['onRequestSent', -1]];
+        return array('request.sent' => array('onRequestSent', -1));
     }
 
     /**

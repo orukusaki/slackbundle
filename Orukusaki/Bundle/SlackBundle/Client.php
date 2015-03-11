@@ -13,7 +13,7 @@ class Client extends BaseClient
     /**
      * @var array
      */
-    protected $identity = [];
+    protected $identity = array();
 
     /**
      * @param array $config

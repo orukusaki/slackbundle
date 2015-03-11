@@ -16,7 +16,6 @@ class SayHiListener
 
     /**
      * @param $client
-     * @param $identity
      */
     public function __construct($client)
     {
