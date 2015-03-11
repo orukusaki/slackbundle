@@ -16,7 +16,7 @@ class ApiErrorSubscriberSpec extends ObjectBehavior
 
     public function it_subscribes_to_sent_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(['request.sent' => ['onRequestSent', -1]]);
+        $this::getSubscribedEvents()->shouldReturn(array('request.sent' => array('onRequestSent', -1)));
     }
 
     public function it_raises_exception_on_non_ok_response(RequestInterface $request)
