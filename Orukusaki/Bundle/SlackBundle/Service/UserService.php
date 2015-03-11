@@ -1,16 +1,35 @@
 <?php
 namespace Orukusaki\Bundle\SlackBundle\Service;
 
+/**
+ * Class UserService
+ * @package Orukusaki\Bundle\SlackBundle\Service
+ */
 class UserService
 {
+    /**
+     * @var
+     */
     protected $client;
-    protected $users = array();
 
+    /**
+     * @var array
+     */
+    protected $users = [];
+
+    /**
+     * @param $client
+     */
     public function __construct($client)
     {
         $this->client = $client;
     }
 
+    /**
+     * @param $userId
+     *
+     * @return mixed
+     */
     public function getUserName($userId)
     {
         if ($user = $this->getUser($userId)) {
@@ -18,6 +37,11 @@ class UserService
         }
     }
 
+    /**
+     * @param $userId
+     *
+     * @return mixed
+     */
     public function getUser($userId)
     {
         if (!array_key_exists($userId, $this->users)) {
@@ -28,6 +52,7 @@ class UserService
             return $this->users[$userId];
         }
     }
+
 
     private function fetchUsers()
     {

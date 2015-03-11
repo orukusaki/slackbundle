@@ -4,16 +4,30 @@ namespace Orukusaki\Bundle\SlackBundle\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
+/**
+ * Class CommandReceivedEvent
+ * @package Orukusaki\Bundle\SlackBundle\Event
+ */
 class CommandReceivedEvent extends Event
 {
     const KEY = 'slack.command.received';
 
-    protected $command = array();
+    /**
+     * @var array
+     */
+    protected $command = [];
+
+    /**
+     * @var string
+     */
     protected $response = '';
 
+    /**
+     * @param ParameterBag $request
+     */
     public function __construct(ParameterBag $request)
     {
-        $this->command = array(
+        $this->command = [
             'token'        => $request->get('token'),
             'team_id'      => $request->get('team_id'),
             'channel_id'   => $request->get('channel_id'),
@@ -22,14 +36,20 @@ class CommandReceivedEvent extends Event
             'user_name'    => $request->get('user_name'),
             'command'      => $request->get('command'),
             'text'         => $request->get('text'),
-        );
+        ];
     }
 
+    /**
+     * @return string
+     */
     public function getResponse()
     {
         return $this->response;
     }
 
+    /**
+     * @param mixed $response
+     */
     public function setResponse($response)
     {
         if ('' != $response) {
@@ -38,6 +58,9 @@ class CommandReceivedEvent extends Event
         $this->response = $response;
     }
 
+    /**
+     * @return array
+     */
     public function getCommand()
     {
         return $this->command;
