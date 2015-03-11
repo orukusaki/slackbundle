@@ -38,7 +38,7 @@ class CommandReceivedEventSpec extends ObjectBehavior
    public function it_exposes_a_command()
     {
         $this->getCommand()->shouldReturn(
-            [
+            array(
                 'token'        => '12345678',
                 'team_id'      => 'team',
                 'channel_id'   => 'CX12345',
@@ -47,7 +47,7 @@ class CommandReceivedEventSpec extends ObjectBehavior
                 'user_name'    => 'myName',
                 'command'      => '/slash',
                 'text'         => 'command',
-            ]
+            )
         );
     }
 }
