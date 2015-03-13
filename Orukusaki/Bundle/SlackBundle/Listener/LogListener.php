@@ -40,7 +40,7 @@ class LogListener
             $date->setTimeStamp($message['ts']);
         }
 
-        $username = isset($message['user']) ? $this->userService->getUserName($message['user']) : '*** me ***';
+        $username = isset($message['user_id']) ? $this->userService->getUserName($message['user_id']) : '*** me ***';
 
         $text = '[' . $date->format('Y-m-d H:i:s') . '] '
               . '[' . $username . '] '
